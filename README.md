@@ -26,12 +26,14 @@ script to check that a website is up
     - **smtp** tells pyalive which smtp account to use (pyalive falls back to sendmail if this is omitted)
 
 3. Edit contab using this command
-
+    ```Shell
     $ crontab -e
+    ```
 
 4. Add this line to the jobs
-
+    ```Shell
     */30 *  * * * . $HOME/.profile; /path/to/pyalive/pyalive.py --config=/path/to/json/config/pyalive.json
+    ```
 
 *Now you're done!*
 
