@@ -28,7 +28,7 @@ def send_smtp_mail(**kwargs):
     composed = outer.as_string()
     server = smtplib.SMTP_SSL(kwargs['host'])
     server.login(kwargs['user'], kwargs['password'])
-    server.set_debuglevel(1)
+    server.set_debuglevel(0)
     server.sendmail(outer['From'], outer['To'], composed)
     server.quit()
 
