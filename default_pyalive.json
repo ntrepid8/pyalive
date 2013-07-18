@@ -1,0 +1,10 @@
+{
+    "urls": [],
+    "emails": [],
+    "from": "",
+    "smtp": {
+        "user": "",
+        "password": "",
+        "host": ""
+    }
+}
