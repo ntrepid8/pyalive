@@ -17,7 +17,7 @@ alive_codes = {200, 201, 202, 203, 204, 205, 206, 301, 302, 303, 304}
 def is_alive(url, session=None):
     s = session if session else requests
     r = s.get(url=url, verify=False)
-    if r.status_code in alive_codes:
+    if r.status_code not in alive_codes:
         raise ValueError("%s failed with code %s" % (url, str(r.status_code)))
     return True
 
