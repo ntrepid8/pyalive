@@ -9,6 +9,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from subprocess import Popen, PIPE
 
+error_subject = "CRITICAL WEBSITE ERROR(S) - notified by pyalive"
+ok_subject = "WEBSITE(S) ARE ALIVE - notified by pyalive"
+
 
 def is_alive(url, session=None):
     s = session if session else requests
@@ -46,16 +49,21 @@ def main():
     parser = ArgumentParser()
     parser.add_argument("--config", dest="config", help="path to the JSON config file", default=None)
     parser.add_argument("--url", dest="url", help="url to test", default=None)
+    parser.add_argument("--notify-on", dest="notify", default="errors",
+                        help="notify your on \"all\" checks or \"errors\" only")
     args = parser.parse_args()
     results = dict()
+    errors_detected = False
     if args.url:
         try:
             alive = is_alive(args.url)
             results[args.url] = {"alive": alive, "message": None}
         except ValueError, e:
             results[args.url] = {"alive": False, "message": repr(e)}
+            errors_detected = True
         except ConnectionError, e:
             results[args.url] = {"alive": False, "message": repr(e)}
+            errors_detected = True
 
     config = None
     if args.config:
@@ -70,28 +78,31 @@ def main():
             results[url] = {"alive": alive, "message": None}
         except ValueError, e:
             results[url] = {"alive": False, "message": repr(e)}
+            errors_detected = True
         except ConnectionError, e:
             results[url] = {"alive": False, "message": repr(e)}
+            errors_detected = True
 
-    smtp = config.get('smtp') if config else None
-    common_email = {
-        "from": config.get("from") if config else None,
-        "subject": "CRITICAL WEBSITE ERROR(S) - notified by pyalive",
-        "text": json.dumps(results, indent=4, sort_keys=True),
-    }
-    if smtp:
-        for e in config.get('emails', []):
-            email = {"to": e}
-            email.update(common_email)
-            email.update(smtp)
-            send_smtp_mail(**email)
-    elif config:
-        for e in config.get('emails', []):
-            email = {"to": e}
-            email.update(common_email)
-            send_sendmail_mail(**email)
-    else:
-        print common_email['text']
+    if args.notify == "all" or (args.notify == "errors" and errors_detected):
+        smtp = config.get('smtp') if config else None
+        common_email = {
+            "from": config.get("from") if config else None,
+            "subject": error_subject if errors_detected else ok_subject,
+            "text": json.dumps(results, indent=4, sort_keys=True),
+        }
+        if smtp:
+            for e in config.get('emails', []):
+                email = {"to": e}
+                email.update(common_email)
+                email.update(smtp)
+                send_smtp_mail(**email)
+        elif config:
+            for e in config.get('emails', []):
+                email = {"to": e}
+                email.update(common_email)
+                send_sendmail_mail(**email)
+        else:
+            print common_email['text']
 
 
 if __name__ == '__main__':
