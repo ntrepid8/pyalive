@@ -10,16 +10,16 @@ script to check that a website is up
 1. Make a copy of the default_pyalive.json file found in this directory and call it whatever you want.
 2. Fill out the information in the JSON like this:
 
-        {
-            "urls": ["https://maasive.net", "https://www.rescour.com"],
-            "emails": ["ops@maasive.net"],
-            "from": "foo@bar.com",
-            "smtp": {
-                "user": "foo@bar.com",
-                "password": "baz",
-                "host": "bar.com"
+            {
+                "urls": ["https://maasive.net", "https://www.rescour.com"],
+                "emails": ["ops@maasive.net"],
+                "from": "foo@bar.com",
+                "smtp": {
+                    "user": "foo@bar.com",
+                    "password": "baz",
+                    "host": "bar.com"
+                }
             }
-        }
 
     - **sites** tells pyalive which sites to check
     - **emails** tells pyalive which emails to notify if there is a problem
