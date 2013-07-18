@@ -3,6 +3,12 @@ alive
 
 script to check that a website is up
 
+##Command Line Options
+
+* --config *path to the json config file*
+* --url *check to see if the supplied URL is alive*
+* --notify-on *"errors" or "all" (if you run the job hourly and set this to all, you will get a lot of email)*
+
 ##Setup
 
 *(these instructions have been tested on ubuntu linix, YMMV)*
