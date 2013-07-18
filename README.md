@@ -20,6 +20,7 @@ script to check that a website is up
         }
     }
 
+
     - **sites** tells pyalive which sites to check
     - **emails** tells pyalive which emails to notify if there is a problem
     - **smtp** tells pyalive which smtp account to use (pyalive falls back to sendmail if this is omitted)
