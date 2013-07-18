@@ -1,7 +1,10 @@
-alive
+PyAlive
 =====
 
-script to check that a website is up
+A simple python script to check if website is up.  A response code matching an alive code counts as up,
+anything else is an error.
+
+Alive Codes = {200, 201, 202, 203, 204, 205, 206, 301, 302, 303, 304}
 
 ##Command Line Options
 

@@ -11,12 +11,13 @@ from subprocess import Popen, PIPE
 
 error_subject = "CRITICAL WEBSITE ERROR(S) - notified by pyalive"
 ok_subject = "WEBSITE(S) ARE ALIVE - notified by pyalive"
+alive_codes = {200, 201, 202, 203, 204, 205, 206, 301, 302, 303, 304}
 
 
 def is_alive(url, session=None):
     s = session if session else requests
     r = s.get(url=url, verify=False)
-    if r.status_code != 200:
+    if r.status_code in alive_codes:
         raise ValueError("%s failed with code %s" % (url, str(r.status_code)))
     return True
 
