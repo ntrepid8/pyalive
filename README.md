@@ -13,16 +13,16 @@ script to check that a website is up
     - **emails** tells pyalive which emails to notify if there is a problem
     - **smtp** tells pyalive which smtp account to use (pyalive falls back to sendmail if this is omitted)
 
-        {
-            "urls": ["https://maasive.net", "https://www.rescour.com"],
-            "emails": ["ops@maasive.net"],
-            "from": "foo@bar.com",
-            "smtp": {
-                "user": "foo@bar.com",
-                "password": "baz",
-                "host": "bar.com"
+            {
+                "urls": ["https://maasive.net", "https://www.rescour.com"],
+                "emails": ["ops@maasive.net"],
+                "from": "foo@bar.com",
+                "smtp": {
+                    "user": "foo@bar.com",
+                    "password": "baz",
+                    "host": "bar.com"
+                }
             }
-        }
 
 3. Edit contab using this command
 
