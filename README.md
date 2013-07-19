@@ -20,8 +20,8 @@ Alive Codes = {200, 201, 202, 203, 204, 205, 206, 301, 302, 303, 304}
 2. Fill out the information in the JSON like this:
     ```JSON
     {
-        "urls": ["https://maasive.net", "https://www.rescour.com"],
-        "emails": ["ops@maasive.net"],
+        "urls": ["https://foo.net", "https://www.bar.com"],
+        "emails": ["ops@bar.net"],
         "from": "foo@bar.com",
         "smtp": {
             "user": "foo@bar.com",
