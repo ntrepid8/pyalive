@@ -1,8 +1,7 @@
 PyAlive
 =====
 
-A simple python script to check if website is up.  A response code matching an alive code counts as up,
-anything else is an error.
+A simple python script to check if website is up.  PyAlive issued a GET request to the URLs you specify and if a response code matching an alive code counts as up, anything else is an error.
 
 Alive Codes = {200, 201, 202, 203, 204, 205, 206, 301, 302, 303, 304}
 
